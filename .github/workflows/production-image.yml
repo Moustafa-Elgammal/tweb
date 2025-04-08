@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: ['14', '15', '16']
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,8 +23,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          - node-version: '14'
-          - node-version: '15'
+          node-version: ${{ matrix.node-version }}
 
       - name: Read version from .env
         id: env
